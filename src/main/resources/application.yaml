@@ -1,0 +1,27 @@
+spring:
+
+  #  postgresql
+  datasource:
+    hikari:
+      maximum-pool-size: '4'
+    username: admin_test
+    url: jdbc:postgresql://localhost:5432/sync
+    platform: postgres
+
+  kafka:
+    consumer:
+      group-id: test
+    bootstrap-servers: localhost:9092
+
+  redis:
+    host: localhost
+    port: 6379
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: 'true'
+    show-sql: 'false'
+    hibernate:
+      ddl-auto: create
+
