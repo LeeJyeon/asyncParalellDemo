@@ -18,7 +18,7 @@ public class KafkaConsumerC {
     }
 
 
-    @KafkaListener(topics = {"testC"})
+    @KafkaListener(topics = {"testC"} , errorHandler = "kafkaExceptionHandler")
     public void receiveMessageC(String message) throws InterruptedException {
         log.info("[Test] Kafka Consumer message : {}", message);
         // key, date, uuid, message, nextSeq

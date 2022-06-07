@@ -1,6 +1,7 @@
 package com.test.project.async.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class KafkaConsumerA {
     }
 
 
-    @KafkaListener(topics = {"testA"})
+    @KafkaListener(topics = {"testA"} , errorHandler = "kafkaExceptionHandler")
     public void receiveMessageA(String message) throws InterruptedException {
         log.info("[Test] Kafka Consumer message : {}", message);
         // key, date, uuid, message, nextSeq

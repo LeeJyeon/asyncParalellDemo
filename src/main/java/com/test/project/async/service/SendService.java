@@ -5,6 +5,7 @@ import com.test.project.async.repository.SendRepository;
 import com.test.project.async.table.Send;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +20,13 @@ public class SendService {
         data.setDate(date);
         data.setComNumber(comNumber);
         data.setContent( "done{" + context + "}");
-        sendRepository.save(data);
+
+        try{
+            sendRepository.save(data);
+            log.info("Send Success! [{} {}]" , date , comNumber);
+        } catch (DataIntegrityViolationException e) {
+            log.warn("dup error skip!");
+            throw e;
+        }
     }
 }

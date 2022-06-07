@@ -38,12 +38,7 @@ public class ProcessSend {
         log.info("count up! value {} {}", dest ,  valueOperations.get(uuid));
 
         if (valueOperations.get(uuid).equals("9")) {
-            try {
-                sendService.sendCom(date, comNumber, context + dest);
-                log.info("uuid[{}] is done", uuid);
-            } catch (DataIntegrityViolationException e) {
-                log.warn("dup error skip!");
-            }
+            sendService.sendCom(date, comNumber, context + dest);
         }
 
     }
