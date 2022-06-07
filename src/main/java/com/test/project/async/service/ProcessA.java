@@ -16,14 +16,14 @@ public class ProcessA {
         CheckA data = new CheckA();
         data.setDate(date);
         data.setUuid(uuid);
-
-        if (uuid.substring(0).compareTo("3") <= 0) {
-            Thread.sleep(1000L);
-        } else if (uuid.substring(0).compareTo("6") <= 0) {
-            Thread.sleep(3000L);
-        } else {
-            Thread.sleep(5000L);
-        }
+//
+//        if (uuid.substring(0).compareTo("3") <= 0) {
+//            Thread.sleep(1000L);
+//        } else if (uuid.substring(0).compareTo("6") <= 0) {
+//            Thread.sleep(3000L);
+//        } else {
+//            Thread.sleep(5000L);
+//        }
 
         checkARepository.save(data);
 

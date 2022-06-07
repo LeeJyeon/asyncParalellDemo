@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class ProcessC {
 
     @Autowired
-    CheckCRepository checkARepository;
+    CheckCRepository checkCRepository;
 
     public boolean saveC(String date, String uuid) throws InterruptedException {
 
@@ -17,15 +17,15 @@ public class ProcessC {
         data.setDate(date);
         data.setUuid(uuid);
 
-        if (uuid.substring(0).compareTo("3") <= 0) {
-            Thread.sleep(5000L);
-        } else if (uuid.substring(0).compareTo("6") <= 0) {
-            Thread.sleep(1000L);
-        } else {
-            Thread.sleep(3000L);
-        }
+//        if (uuid.substring(0).compareTo("3") <= 0) {
+//            Thread.sleep(5000L);
+//        } else if (uuid.substring(0).compareTo("6") <= 0) {
+//            Thread.sleep(1000L);
+//        } else {
+//            Thread.sleep(3000L);
+//        }
 
-        checkARepository.save(data);
+        checkCRepository.save(data);
 
         return true;
     }

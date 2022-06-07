@@ -40,9 +40,7 @@ public class StartService {
             continue;
         }
 
-
         Long nextSeq = receiveRepository.selectMaxNumber(formattedNow);
-        log.info("nextSeq {}", nextSeq);
 
         Receive data = new Receive();
         data.setContent(com);

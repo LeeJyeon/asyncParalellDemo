@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,7 +15,8 @@ import java.util.Date;
 @Table(name = "TABLE_A")
 @IdClass(KeysCheck.class)
 @ToString
-public class CheckA  implements Serializable {
+public class
+CheckA  implements Serializable {
 
     @Id
     @Column(length = 8)
