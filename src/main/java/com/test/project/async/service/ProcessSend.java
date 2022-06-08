@@ -1,44 +1,39 @@
 package com.test.project.async.service;
 
+import com.test.project.async.redis.UseRedis;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 public class ProcessSend {
 
-    private final StringRedisTemplate redisTemplate;
     private final SendService sendService;
+    private final UseRedis useRedis;
 
-    public ProcessSend(StringRedisTemplate redisTemplate, SendService sendService) {
-        this.redisTemplate = redisTemplate;
+    public ProcessSend(SendService sendService, UseRedis useRedis) {
         this.sendService = sendService;
+        this.useRedis = useRedis;
     }
 
     public void sendCom(String uuid, String date, Long comNumber, String context, String dest) {
 
-        ValueOperations<String, String> valueOperations = redisTemplate.opsForValue();
+        useRedis.setValue(dest, uuid);
 
-        switch (dest) {
-            case "A":
-                valueOperations.increment(uuid, 1);
-                break;
-            case "B":
-                valueOperations.increment(uuid, 3);
-                break;
-            case "C":
-                valueOperations.increment(uuid, 5);
-                break;
-        }
+        log.info("count up! value {} {}", dest, useRedis.getValue(uuid, "A"));
+        log.info("count up! value {} {}", dest, useRedis.getValue(uuid, "B"));
+        log.info("count up! value {} {}", dest, useRedis.getValue(uuid, "C"));
 
-        log.info("count up! value {} {}", dest ,  valueOperations.get(uuid));
 
-        if (valueOperations.get(uuid).equals("9")) {
-            sendService.sendCom(date, comNumber, context + dest);
+        if (useRedis.checkNext(uuid)) {
+            sendService.sendCom(date,
+                    comNumber,
+                    context
+                            + dest
+                            + useRedis.getValue(uuid, "A")
+                            + useRedis.getValue(uuid, "B")
+                            + useRedis.getValue(uuid, "C")
+            );
         }
 
     }

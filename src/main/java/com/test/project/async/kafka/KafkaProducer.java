@@ -1,4 +1,4 @@
-package com.test.project.async.service;
+package com.test.project.async.kafka;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

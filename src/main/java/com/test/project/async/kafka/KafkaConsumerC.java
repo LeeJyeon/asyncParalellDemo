@@ -1,5 +1,7 @@
-package com.test.project.async.service;
+package com.test.project.async.kafka;
 
+import com.test.project.async.service.ProcessC;
+import com.test.project.async.service.ProcessSend;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;

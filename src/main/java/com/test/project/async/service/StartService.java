@@ -1,5 +1,6 @@
 package com.test.project.async.service;
 
+import com.test.project.async.kafka.KafkaProducer;
 import com.test.project.async.repository.ReceiveRepository;
 import com.test.project.async.table.Receive;
 import lombok.extern.slf4j.Slf4j;
