@@ -6,6 +6,6 @@ public interface UseRedis {
 
     String getValue(String key,String hashKey);
     void setValue(String dest , String key);
-    boolean checkNext(String key);
+    boolean checkNextAble(String key);
 
 }

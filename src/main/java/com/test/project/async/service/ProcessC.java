@@ -17,13 +17,8 @@ public class ProcessC {
         data.setDate(date);
         data.setUuid(uuid);
 
-//        if (uuid.substring(0).compareTo("3") <= 0) {
-//            Thread.sleep(5000L);
-//        } else if (uuid.substring(0).compareTo("6") <= 0) {
-//            Thread.sleep(1000L);
-//        } else {
-//            Thread.sleep(3000L);
-//        }
+        Sleep sleep = new Sleep();
+        sleep.sleep("C", uuid);
 
         checkCRepository.save(data);
 

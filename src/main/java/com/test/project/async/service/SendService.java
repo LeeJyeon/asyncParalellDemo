@@ -26,7 +26,6 @@ public class SendService {
             log.info("Send Success! [{} {}]" , date , comNumber);
         } catch (DataIntegrityViolationException e) {
             log.warn("dup error skip!");
-            throw e;
         }
     }
 }

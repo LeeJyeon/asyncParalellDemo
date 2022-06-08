@@ -1,11 +1,13 @@
 package com.test.project.async.redis;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class UseRedisMap implements UseRedis {
 
     @Autowired
@@ -24,14 +26,14 @@ public class UseRedisMap implements UseRedis {
     @Override
     public void setValue(String dest, String key) {
         HashOperations<String, Object, Object> hashOperations = redisTemplate.opsForHash();
-        hashOperations.put(key , dest , " success("+dest+") ");
+        hashOperations.put(key, dest, " success(" + dest + ") ");
     }
 
     @Override
-    public boolean checkNext(String key) {
-        if (!getValue(key, "A").isEmpty() &&
-                !getValue(key, "B").isEmpty() &&
-                !getValue(key, "C").isEmpty() ) {
+    public boolean checkNextAble(String key) {
+        if (getValue(key, "A") != null &&
+                getValue(key, "B") != null &&
+                getValue(key, "C") != null) {
             return true;
         }
         return false;

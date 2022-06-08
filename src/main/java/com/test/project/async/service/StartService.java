@@ -53,9 +53,9 @@ public class StartService {
         kafkaProducer.sendMessage("testA", "A", formattedNow, uuid.toString(), com, nextSeq);
         kafkaProducer.sendMessage("testB", "B", formattedNow, uuid.toString(), com, nextSeq);
         kafkaProducer.sendMessage("testC", "C", formattedNow, uuid.toString(), com, nextSeq);
+        kafkaProducer.sendMessage("testD", "D", formattedNow, uuid.toString(), com, nextSeq);
 
         log.info("[JOB] receive success & publish");
-
     }
 
 

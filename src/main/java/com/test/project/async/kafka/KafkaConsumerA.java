@@ -3,7 +3,6 @@ package com.test.project.async.kafka;
 import com.test.project.async.service.ProcessA;
 import com.test.project.async.service.ProcessSend;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,6 @@ public class KafkaConsumerA {
 
     private final ProcessA processA;
     private final ProcessSend processSend;
-
 
     public KafkaConsumerA(ProcessA processA, ProcessSend processSend) {
         this.processA = processA;
@@ -29,9 +27,8 @@ public class KafkaConsumerA {
         String[] subMessage = message.split("/");
         String uuid = subMessage[2];
 
-        processA.saveA(subMessage[1], uuid);
-
-        processSend.sendCom(uuid, subMessage[1], Long.valueOf(subMessage[4]), subMessage[3] , "A");
+        if (processA.saveA(subMessage[1], uuid)) {
+            processSend.sendCom(uuid, subMessage[1], Long.valueOf(subMessage[4]), subMessage[3] , "A");
+        }
     }
-
 }

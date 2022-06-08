@@ -16,17 +16,13 @@ public class ProcessB {
         CheckB data = new CheckB();
         data.setDate(date);
         data.setUuid(uuid);
-//
-//        if (uuid.substring(0).compareTo("3") <= 0) {
-//            Thread.sleep(3000L);
-//        } else if (uuid.substring(0).compareTo("6") <= 0) {
-//            Thread.sleep(5000L);
-//        } else {
-//            Thread.sleep(1000L);
-//        }
 
+        Sleep sleep = new Sleep();
+        sleep.sleep("B", uuid);
         checkBRepository.save(data);
 
         return true;
     }
+
+
 }

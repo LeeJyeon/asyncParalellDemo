@@ -3,6 +3,7 @@ package com.test.project.async.service;
 import com.test.project.async.redis.UseRedis;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -20,20 +21,18 @@ public class ProcessSend {
 
         useRedis.setValue(dest, uuid);
 
-        log.info("count up! value {} {}", dest, useRedis.getValue(uuid, "A"));
-        log.info("count up! value {} {}", dest, useRedis.getValue(uuid, "B"));
-        log.info("count up! value {} {}", dest, useRedis.getValue(uuid, "C"));
-
-
-        if (useRedis.checkNext(uuid)) {
-            sendService.sendCom(date,
-                    comNumber,
-                    context
-                            + dest
-                            + useRedis.getValue(uuid, "A")
-                            + useRedis.getValue(uuid, "B")
-                            + useRedis.getValue(uuid, "C")
-            );
+        if (dest.equals("D")) {
+            sendService.sendCom(date, comNumber, "[Time Out]" + context);
+        } else {
+            if (useRedis.checkNextAble(uuid) && useRedis.getValue(uuid, "D") == null ) {
+                sendService.sendCom(date,
+                        comNumber,
+                        context + " / " + dest +" / "
+                                + useRedis.getValue(uuid, "A")
+                                + useRedis.getValue(uuid, "B")
+                                + useRedis.getValue(uuid, "C")
+                );
+            }
         }
 
     }

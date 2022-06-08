@@ -13,7 +13,6 @@ public class KafkaConsumerC {
     private final ProcessC processC;
     private final ProcessSend processSend;
 
-
     public KafkaConsumerC(ProcessC processC, ProcessSend processSend) {
         this.processC = processC;
         this.processSend = processSend;
@@ -28,11 +27,9 @@ public class KafkaConsumerC {
         String[] subMessage = message.split("/");
         String uuid = subMessage[2];
 
-        processC.saveC(subMessage[1], uuid);
-
-        processSend.sendCom(uuid, subMessage[1], Long.valueOf(subMessage[4]), subMessage[3] , "C");
-
-
+        if (processC.saveC(subMessage[1], uuid)) {
+            processSend.sendCom(uuid, subMessage[1], Long.valueOf(subMessage[4]), subMessage[3] , "C");
+        }
     }
 
 }

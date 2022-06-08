@@ -40,12 +40,10 @@ public class UseRedisNumber implements UseRedis{
     }
 
     @Override
-    public boolean checkNext(String key) {
+    public boolean checkNextAble(String key) {
         if (getValue(key,"").equals("9")) {
             return true;
         }
         return false;
     }
-
-
 }
